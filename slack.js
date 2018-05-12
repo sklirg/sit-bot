@@ -2,10 +2,10 @@ const fetch = require('node-fetch');
 
 
 function generateSlackMessage(cantinaInfo, options) {
-  if (cantinaInfo.error) {
+  if (cantinaInfo.request_error) {
     return {
       response_type: 'ephemeral',
-      text: `${cantinaInfo.error} (${cantinaInfo.cantina})}`,
+      text: `${cantinaInfo.request_error} (${cantinaInfo.cantina})}`,
     };
   }
 

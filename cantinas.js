@@ -26,10 +26,10 @@ async function getCantina(cantina) {
   const json = await response.json();
 
   // Return error as message if any
-  if (json.error) {
+  if (json.error && !json.hours) {
     return {
       cantina: cantina,
-      error: json.error,
+      request_error: json.error,
     };
   }
 
