@@ -1,5 +1,22 @@
 const fetch = require('node-fetch');
 
+async function slackInstall(req, res, next) {
+  // https://slack.com/api/oauth.access
+  const queryparams = {
+    code: req.query.code || '',
+    redirect_uri: req.query.redirect_uri || '',
+    client_id: process.env.SITBOT_SLACK_CLIENT_ID,
+    client_secret: process.env.SITBOT_SLACK_CLIENT_SECRET,
+  };
+
+  const url = `https://slack.com/api/oauth.access?${querystring.stringify(queryparams)};`
+
+  const resp = await fetch(url);
+
+  res.send();
+  next();
+}
+
 
 function generateSlackMessage(cantinaInfo, options) {
   if (cantinaInfo.request_error) {
@@ -46,4 +63,5 @@ async function postDelayedSlackMessage(response_url, message) {
 module.exports = {
   generateSlackMessage,
   postDelayedSlackMessage,
+  slackInstall,
 }

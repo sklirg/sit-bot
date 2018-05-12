@@ -2,7 +2,7 @@ const restify = require('restify');
 const querystring = require('querystring');
 
 const { getCantina, getDefaultCantinas } = require('./cantinas');
-const { generateSlackMessage, postDelayedSlackMessage } = require('./slack');
+const { generateSlackMessage, postDelayedSlackMessage, slackInstall } = require('./slack');
 
 async function cantinas(req, res, next) {
   const response_url = req.body.response_url;
@@ -35,23 +35,6 @@ async function cantinas(req, res, next) {
 
 async function cantina(req, res, next) {
   res.send(generateSlackMessage(await getCantina(req.params.name)));
-  next();
-}
-
-async function slackInstall(req, res, next) {
-  // https://slack.com/api/oauth.access
-  const queryparams = {
-    code: req.query.code || '',
-    redirect_uri: req.query.redirect_uri || '',
-    client_id: process.env.SITBOT_SLACK_CLIENT_ID,
-    client_secret: process.env.SITBOT_SLACK_CLIENT_SECRET,
-  };
-
-  const url = `https://slack.com/api/oauth.access?${querystring.stringify(queryparams)};`
-
-  const resp = await fetch(url);
-
-  res.send();
   next();
 }
 
