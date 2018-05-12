@@ -7,9 +7,6 @@ async function cantinas(req, res, next) {
   const response_url = req.body.response_url;
 
   const requestedCantina = ((req.body) && req.body.text.trim()) || '';
-  if (requestedCantina === '') {
-    requestedCantina = getDefaultCantinas();
-  }
   // !req.body.text || req.body.text !== '' || req.body.text.split(' ').length === 1
 
   const cantinaToFetch = (requestedCantina === '' ? getDefaultCantinas() : requestedCantina.split(' '));
