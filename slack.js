@@ -13,7 +13,8 @@ function generateSlackMessage(cantinaInfo, options) {
     response_type: (options && options.response_type) || 'ephemeral',
     text: `Jeg hentet informasjon om ${cantinaInfo.name} for deg.`,
     attachments: [
-      {
+      // @ToDo: Find better way to conitionally include; this results in undefined if false.
+      (cantinaInfo.hours) && {
         title: 'Åpen nå?',
         text: cantinaInfo.hours.message,
       },
