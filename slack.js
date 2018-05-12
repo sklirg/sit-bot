@@ -29,7 +29,7 @@ function postDelayedSlackMessage(response_url, message) {
     headers: {
       'content-type': 'application/json',
     },
-    body: message,
+    body: JSON.stringify(message),
   });
 }
 

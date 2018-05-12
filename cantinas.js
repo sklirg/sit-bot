@@ -14,8 +14,25 @@ const defaultCantinas = ['hangaren', 'realfag', 'storkiosk%20gloshaugen']
 async function getCantina(cantina) {
   const url = `${NOTIWIRE_API}${NOTIWIRE_CANTINAS}${cantina}`;
   console.log('Requesting cantina info at', url)
-  const response = await fetch(url);
+
+  let response;
+  try {
+    response = await fetch(url);
+  } catch (err) {
+    return {
+      error: 'Noe gikk galt.',
+    };
+  }
   const json = await response.json();
+
+  // Return error as message if any
+  if (json.error) {
+    return {
+      cantina: cantina,
+      error: json.error,
+    };
+  }
+
   console.log('response', json)
   return json;
 }
