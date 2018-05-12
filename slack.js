@@ -11,7 +11,7 @@ async function slackInstall(req, res, next) {
     client_secret: process.env.SITBOT_SLACK_CLIENT_SECRET,
   };
 
-  const url = `https://slack.com/api/oauth.access?${querystring.stringify(queryparams)};`
+  const url = `https://slack.com/api/oauth.access?${querystring.stringify(queryparams)}`;
 
   const resp = await fetch(url);
 
