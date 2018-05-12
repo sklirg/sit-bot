@@ -9,7 +9,7 @@ const fetch = require('node-fetch');
 const NOTIWIRE_API = 'https://passoa.online.ntnu.no/api/'
 const NOTIWIRE_CANTINAS = 'cantina/'
 
-const defaultCantinas = ['hangaren', 'realfag', 'storkiosk%20gloshaugen']
+const defaultCantinas = ['hangaren', 'realfag', 'storkiosk gloshaugen']
 
 async function getCantina(cantina) {
   const url = `${NOTIWIRE_API}${NOTIWIRE_CANTINAS}${encodeURIComponent(cantina)}`;
