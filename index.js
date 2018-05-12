@@ -1,4 +1,5 @@
 const restify = require('restify');
+const querystring = require('querystring');
 
 const { getCantina, getDefaultCantinas } = require('./cantinas');
 const { generateSlackMessage, postDelayedSlackMessage } = require('./slack');
@@ -37,6 +38,23 @@ async function cantina(req, res, next) {
   next();
 }
 
+async function slackInstall(req, res, next) {
+  // https://slack.com/api/oauth.access
+  const queryparams = {
+    code: req.query.code || '',
+    redirect_uri: req.query.redirect_uri || '',
+    client_id: process.env.SITBOT_SLACK_CLIENT_ID,
+    client_secret: process.env.SITBOT_SLACK_CLIENT_SECRET,
+  };
+
+  const url = `https://slack.com/api/oauth.access?${querystring.stringify(queryparams)};`
+
+  const resp = await fetch(url);
+
+  res.send();
+  next();
+}
+
 var server = restify.createServer();
 
 server.use(restify.plugins.queryParser());
@@ -45,6 +63,7 @@ server.use(restify.plugins.bodyParser());
 server.post('/api/cantina', cantinas);
 server.post('/api/cantina/', cantinas);
 server.post('/api/cantina/:name', cantina);
+server.get('/api/oauth/slack-install', slackInstall)
 
 server.listen(8085, function() {
   console.log('%s listening at %s', server.name, server.url);
