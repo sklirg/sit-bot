@@ -12,7 +12,7 @@ const NOTIWIRE_CANTINAS = 'cantina/'
 const defaultCantinas = ['hangaren', 'realfag', 'storkiosk%20gloshaugen']
 
 async function getCantina(cantina) {
-  const url = `${NOTIWIRE_API}${NOTIWIRE_CANTINAS}${cantina}`;
+  const url = `${NOTIWIRE_API}${NOTIWIRE_CANTINAS}${encodeURIComponent(cantina)}`;
   console.log('Requesting cantina info at', url)
 
   let response;
