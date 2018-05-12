@@ -9,7 +9,7 @@ async function cantinas(req, res, next) {
   const requestedCantina = ((req.body) && req.body.text.trim()) || '';
   // !req.body.text || req.body.text !== '' || req.body.text.split(' ').length === 1
 
-  const cantinaToFetch = (requestedCantina === '' ? getDefaultCantinas() : requestedCantina.split(' '));
+  const cantinaToFetch = (requestedCantina === '' ? getDefaultCantinas() : requestedCantina.split(','));
 
   if (cantinaToFetch.length === 1) {
     // Asks for one cantina
@@ -18,7 +18,7 @@ async function cantinas(req, res, next) {
     // Asks for no specific; defaults to all.
     res.send();
     cantinaToFetch.forEach(async cantina => {
-      const cantinaInfo = await getCantina(cantina);
+      const cantinaInfo = await getCantina(cantina.trim());
       await postDelayedSlackMessage(response_url, generateSlackMessage(cantinaInfo));
     });
   }
