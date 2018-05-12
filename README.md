@@ -1,5 +1,7 @@
 # Sit-bot
 
+<a href="https://slack.com/oauth/authorize?client_id=274699598467.362635732451&scope=commands"><img alt="Add to Slack" height="40" width="139" src="https://platform.slack-edge.com/img/add_to_slack.png" srcset="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x" /></a>
+
 A Slack app providing useful tools for querying the Sit canteens at NTNU in Trondheim.
 
 It makes use of the [Notiwire API](https://github.com/dotkom/notiwire) which parses their menus and opening hours.
