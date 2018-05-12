@@ -1,0 +1,12 @@
+{
+  "name": "sit-bot",
+  "version": "1.0.0",
+  "description": "Slack bot for Sit requests",
+  "main": "index.js",
+  "repository": "https://github.com/sklirg/sit-bot",
+  "author": "sklirg",
+  "license": "MIT",
+  "dependencies": {
+    "restify": "^7.1.1"
+  }
+}
