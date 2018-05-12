@@ -2,6 +2,13 @@ const fetch = require('node-fetch');
 
 
 function generateSlackMessage(cantinaInfo, options) {
+  if (cantinaInfo.error) {
+    return {
+      response_type: 'ephemeral',
+      text: `${cantinaInfo.error} (${cantinaInfo.cantina})}`,
+    };
+  }
+
   return {
     response_type: (options && options.response_type) || 'ephemeral',
     text: `Jeg hentet informasjon om ${cantinaInfo.name} for deg.`,
