@@ -23,14 +23,16 @@ function generateSlackMessage(cantinaInfo, options) {
 }
 
 
-function postDelayedSlackMessage(response_url, message) {
-  fetch(response_url, {
+async function postDelayedSlackMessage(response_url, message) {
+  console.log('posting to slack', response_url, message)
+  const resp = await fetch(response_url, {
     method: 'POST',
     headers: {
       'content-type': 'application/json',
     },
     body: JSON.stringify(message),
   });
+  console.log('post resp', resp.status);
 }
 
 module.exports = {

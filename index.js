@@ -7,7 +7,7 @@ async function cantinas(req, res, next) {
   const response_url = req.body.response_url;
   getDefaultCantinas().forEach(async cantina => {
     const cantinaInfo = await getCantina(cantina);
-    postDelayedSlackMessage(response_url, generateSlackMessage(cantinaInfo));
+    await postDelayedSlackMessage(response_url, generateSlackMessage(cantinaInfo));
   });
   next();
 }
