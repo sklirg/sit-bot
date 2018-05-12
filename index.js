@@ -5,10 +5,26 @@ const { generateSlackMessage, postDelayedSlackMessage } = require('./slack');
 
 async function cantinas(req, res, next) {
   const response_url = req.body.response_url;
-  getDefaultCantinas().forEach(async cantina => {
-    const cantinaInfo = await getCantina(cantina);
-    await postDelayedSlackMessage(response_url, generateSlackMessage(cantinaInfo));
-  });
+
+  const requestedCantina = ((req.body) && req.body.text.trim()) || '';
+  if (requestedCantina === '') {
+    requestedCantina = getDefaultCantinas();
+  }
+  // !req.body.text || req.body.text !== '' || req.body.text.split(' ').length === 1
+
+  const cantinaToFetch = (requestedCantina === '' ? getDefaultCantinas() : requestedCantina.split(' '));
+
+  if (cantinaToFetch.length === 1) {
+    // Asks for one cantina
+    res.send(generateSlackMessage(await getCantina(cantinaToFetch[0])));
+  } else {
+    // Asks for no specific; defaults to all.
+    res.send();
+    cantinaToFetch.forEach(async cantina => {
+      const cantinaInfo = await getCantina(cantina);
+      await postDelayedSlackMessage(response_url, generateSlackMessage(cantinaInfo));
+    });
+  }
   next();
 }
 
