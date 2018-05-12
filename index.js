@@ -9,6 +9,13 @@ async function cantinas(req, res, next) {
   const requestedCantina = ((req.body) && req.body.text.trim()) || '';
   // !req.body.text || req.body.text !== '' || req.body.text.split(' ').length === 1
 
+  if (requestedCantina === 'help') {
+    res.send({
+      text: 'Oppgi en kantine, eller spør om noen standardkantiner. Du vil få informasjon om åpningstid og meny ved disse. For informasjon om hvilke kantiner som støttes, besøk: https://github.com/dotkom/notiwire/blob/8b25461d39563f64b9109d8ce2f131778427c209/libs/cantina.js#L122'
+    })
+    return next();
+  }
+
   const cantinaToFetch = (requestedCantina === '' ? getDefaultCantinas() : requestedCantina.split(','));
 
   if (cantinaToFetch.length === 1) {
@@ -22,7 +29,7 @@ async function cantinas(req, res, next) {
       await postDelayedSlackMessage(response_url, generateSlackMessage(cantinaInfo));
     });
   }
-  next();
+  return next();
 }
 
 async function cantina(req, res, next) {
