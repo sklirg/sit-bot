@@ -1,5 +1,4 @@
 const restify = require('restify');
-const querystring = require('querystring');
 
 const { getCantina, getDefaultCantinas } = require('./cantinas');
 const { generateSlackMessage, postDelayedSlackMessage, slackInstall } = require('./slack');
