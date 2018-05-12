@@ -11,7 +11,7 @@ async function cantinas(req, res, next) {
 
   if (requestedCantina === 'help') {
     res.send({
-      text: 'Oppgi en kantine, eller spør om noen standardkantiner. Du vil få informasjon om åpningstid og meny ved disse. For informasjon om hvilke kantiner som støttes, besøk: https://github.com/dotkom/notiwire/blob/8b25461d39563f64b9109d8ce2f131778427c209/libs/cantina.js#L122'
+      text: 'Oppgi en kantine, eller spør om noen standardkantiner. Du vil få informasjon om åpningstid og meny ved disse. For informasjon om hvilke kantiner som støttes, besøk: https://github.com/dotkom/notiwire/blob/8b25461d39563f64b9109d8ce2f131778427c209/libs/cantina.js#L122 – Rapporter feil og problemer på GitHub, prosjektet er åpent og finnes her: https://github.com/sklirg/sit-bot'
     })
     return next();
   }
