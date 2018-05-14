@@ -7,7 +7,6 @@ async function cantinas(req, res, next) {
   const response_url = req.body.response_url;
 
   const requestedCantina = ((req.body) && req.body.text.trim()) || '';
-  // !req.body.text || req.body.text !== '' || req.body.text.split(' ').length === 1
 
   if (requestedCantina === 'help') {
     res.send({
@@ -22,7 +21,7 @@ async function cantinas(req, res, next) {
     // Asks for one cantina
     res.send(generateSlackMessage(await getCantina(cantinaToFetch[0])));
   } else {
-    // Asks for no specific; defaults to all.
+    // Asks for multiple cantinas.
     res.send();
     cantinaToFetch.forEach(async cantina => {
       const cantinaInfo = await getCantina(cantina.trim());
