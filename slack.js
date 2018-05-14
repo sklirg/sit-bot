@@ -24,6 +24,7 @@ function menuItemsToFields(menu) {
     const flags = item.flags ? `[${item.flags}]` : '';
     const price = item.price ? `(${item.price},-)` : '';
     return {
+      title: `Rett #${item.index}`,
       // Ugly hack to remove adde whitespace if prices and/or flags is empty.
       value: `${item.text} ${price} ${flags}`.replace('  ', ' ').trim(),
       short: true,
