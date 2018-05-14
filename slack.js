@@ -48,7 +48,7 @@ function generateSlackMessage(cantinaInfo, options) {
       // @ToDo: Find better way to conitionally include; this results in undefined if false.
       (cantinaInfo.hours) && {
         title: 'Åpen nå?',
-        text: cantinaInfo.hours.message,
+        text: `${cantinaInfo.hours.open ? 'Ja :heavy_check_mark:' : 'Nei :negative_squared_cross_mark:'} (${cantinaInfo.hours.message})`,
       },
       (cantinaInfo.lunch) && {
         title: 'Lunsjmeny',
