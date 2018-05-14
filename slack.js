@@ -19,6 +19,18 @@ async function slackInstall(req, res, next) {
   next();
 }
 
+function menuItemsToFields(menu) {
+  return menu.map((item) => {
+    const flags = item.flags ? `[${item.flags}]` : '';
+    const price = item.price ? `(${item.price},-)` : '';
+    return {
+      // Ugly hack to remove adde whitespace if prices and/or flags is empty.
+      text: `${item.text} ${price} ${flags}`.replace('  ', ' ').trim(),
+      short: true,
+    }
+  });
+}
+
 
 function generateSlackMessage(cantinaInfo, options) {
   if (cantinaInfo.request_error) {
@@ -40,10 +52,12 @@ function generateSlackMessage(cantinaInfo, options) {
       (cantinaInfo.lunch) && {
         title: 'Lunsjmeny',
         text: cantinaInfo.lunch.message,
+        fields: Array.isArray(cantinaInfo.lunch) && menuItemsToFields(cantinaInfo.lunch),
       },
       (cantinaInfo.dinner) && {
         title: 'Middagsmeny',
         text: cantinaInfo.dinner.message,
+        fields: Array.isArray(cantinaInfo.dinner) && menuItemsToFields(cantinaInfo.dinner),
       },
     ],
   }
