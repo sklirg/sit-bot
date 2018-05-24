@@ -6,7 +6,7 @@ A Slack app providing useful tools for querying the Sit canteens at NTNU in Tron
 
 It makes use of the [Notiwire API](https://github.com/dotkom/notiwire) which parses their menus and opening hours.
 
-![https://i.imgur.com/0H4wudb.png](https://i.imgur.com/0H4wudb.png)
+![https://i.imgur.com/FoUvlcu.png](https://i.imgur.com/FoUvlcu.png)
 
 ## Usage
 
