@@ -16,15 +16,17 @@ async function getCantinas() {
 
   const resp = await fetch(url);
 
-  if (resp.ok) {
-    const cantinas = resp.json();
 
-    return cantinas.map(cantina => ({
+  if (resp.ok) {
+    const cantinas = await resp.json();
+
+    return Promise.resolve((await cantinas).map(cantina => ({
       text: cantina.name,
       value: cantina.id,
-    }))
+    })))
   } else {
     // Sentry?
+      return Promise.reject(resp)
   }
 }
 
