@@ -1,0 +1,8 @@
+version: '3'
+services:
+  sitbot:
+    image: "sklirg/sit-bot:${SB_VERSION}"
+    env_file:
+      - .env
+    labels:
+      - "traefik.sitbot.frontend.rule=Host:${SB_TRAEFIK_HOST_RULE}"
