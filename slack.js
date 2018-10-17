@@ -80,10 +80,10 @@ function generateSlackMessage(cantinaInfo, options) {
 }
 
 
-async function userSelectCantinaMessage(cantinas) {
+function userSelectCantinaMessage(cantinas) {
   return {
     response_type: 'ephemeral',
-    text: '',
+    text: 'Du kan her velge en kantine du vil få informasjon om',
     attachments: [
       {
         text: 'Velg kantine her',
