@@ -56,6 +56,7 @@ function generateSlackMessage(cantinaInfo, options) {
       (cantinaInfo.lunch) && {
         author_name: `${cantinaInfo.name}`,
         author_icon: 'https://pbs.twimg.com/profile_images/1908764294/image001_400x400.png',
+        color: '#2d9ee0',
         title: 'Lunsjmeny',
         text: cantinaInfo.lunch.message,
         fields: Array.isArray(cantinaInfo.lunch) && menuItemsToFields(cantinaInfo.lunch),
@@ -63,6 +64,7 @@ function generateSlackMessage(cantinaInfo, options) {
       (cantinaInfo.dinner) && {
         author_name: `${cantinaInfo.name}`,
         author_icon: 'https://pbs.twimg.com/profile_images/1908764294/image001_400x400.png',
+        color: '#2d9ee0',
         title: 'Middagsmeny',
         text: cantinaInfo.dinner.message,
         fields: Array.isArray(cantinaInfo.dinner) && menuItemsToFields(cantinaInfo.dinner),
