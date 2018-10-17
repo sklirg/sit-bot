@@ -47,16 +47,22 @@ function generateSlackMessage(cantinaInfo, options) {
     attachments: [
       // @ToDo: Find better way to conitionally include; this results in undefined if false.
       (cantinaInfo.hours) && {
+        author_name: `${cantinaInfo.name}`,
+        author_icon: 'https://pbs.twimg.com/profile_images/1908764294/image001_400x400.png',
         color: cantinaInfo.hours.open ? 'success' : 'danger',
         title: 'Åpen nå?',
         text: `${cantinaInfo.hours.open ? 'Ja :heavy_check_mark:' : 'Nei :heavy_multiplication_x:'} (${cantinaInfo.hours.message})`,
       },
       (cantinaInfo.lunch) && {
+        author_name: `${cantinaInfo.name}`,
+        author_icon: 'https://pbs.twimg.com/profile_images/1908764294/image001_400x400.png',
         title: 'Lunsjmeny',
         text: cantinaInfo.lunch.message,
         fields: Array.isArray(cantinaInfo.lunch) && menuItemsToFields(cantinaInfo.lunch),
       },
       (cantinaInfo.dinner) && {
+        author_name: `${cantinaInfo.name}`,
+        author_icon: 'https://pbs.twimg.com/profile_images/1908764294/image001_400x400.png',
         title: 'Middagsmeny',
         text: cantinaInfo.dinner.message,
         fields: Array.isArray(cantinaInfo.dinner) && menuItemsToFields(cantinaInfo.dinner),
