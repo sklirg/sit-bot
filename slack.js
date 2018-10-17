@@ -115,8 +115,19 @@ async function postDelayedSlackMessage(response_url, message) {
   console.log('post resp', resp.status);
 }
 
+
+function handleInteractiveMessage(payload) {
+
+  // Return the selected options for a cantina selection.
+  if (payload.actions && payload.actions.length > 0) {
+    return payload.actions.map(option => option.value);
+  }
+}
+
+
 module.exports = {
   generateSlackMessage,
+  handleInteractiveMessage,
   postDelayedSlackMessage,
   slackInstall,
   userSelectCantinaMessage,
