@@ -3,6 +3,9 @@ const restify = require('restify');
 const { getCantina, getDefaultCantinas } = require('./cantinas');
 const { generateSlackMessage, postDelayedSlackMessage, slackInstall } = require('./slack');
 
+const Sentry = require('@sentry/node');
+Sentry.init({ dsn: process.env.SB_SENTRY_DSN || '' });
+
 async function cantinas(req, res, next) {
   const response_url = req.body.response_url;
 

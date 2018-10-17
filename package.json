@@ -7,7 +7,11 @@
   "author": "sklirg",
   "license": "MIT",
   "dependencies": {
+    "@sentry/node": "4.1.1",
     "node-fetch": "^2.1.2",
     "restify": "^7.1.1"
+  },
+  "scripts": {
+    "start": "node index.js"
   }
 }
