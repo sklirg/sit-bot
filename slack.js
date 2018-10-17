@@ -43,7 +43,7 @@ function generateSlackMessage(cantinaInfo, options) {
 
   return {
     response_type: (options && options.response_type) || 'ephemeral',
-    text: `Jeg hentet informasjon om ${cantinaInfo.name} for deg.`,
+    text: `:robot_face: :hamburger: Jeg hentet informasjon om ${cantinaInfo.name} for deg.`,
     attachments: [
       // @ToDo: Find better way to conitionally include; this results in undefined if false.
       (cantinaInfo.hours) && {
