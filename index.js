@@ -7,15 +7,16 @@ const Sentry = require('@sentry/node');
 Sentry.init({ dsn: process.env.SB_SENTRY_DSN || '' });
 
 async function cantinas(req, res, next) {
-  const response_url = req.body.response_url;
 
-  const hasPayload = req.bod && req.body.payload;
+  const hasPayload = req.body && req.body.payload;
 
   let selectedCantinas = [];
   if (hasPayload) {
     // Blindly hoping this is a cantina selection request
     selectedCantinas = ','.join(handleInteractiveMessage(JSON.parse(req.body.payload)));
   }
+
+  const response_url = (hasPayload && req.body.payload.response_url) || req.body.response_url;
 
   const requestedCantina = (hasPayload && selectedCantinas) || ((req.body) && req.body.text.trim()) || '';
 
