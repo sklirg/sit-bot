@@ -1,7 +1,7 @@
 const restify = require('restify');
 
-const { getCantina, getDefaultCantinas } = require('./cantinas');
-const { generateSlackMessage, postDelayedSlackMessage, slackInstall } = require('./slack');
+const { getCantina, getCantinas, getDefaultCantinas } = require('./cantinas');
+const { generateSlackMessage, postDelayedSlackMessage, slackInstall, userSelectCantinaMessage } = require('./slack');
 
 const Sentry = require('@sentry/node');
 Sentry.init({ dsn: process.env.SB_SENTRY_DSN || '' });
@@ -15,6 +15,9 @@ async function cantinas(req, res, next) {
     res.send({
       text: 'Oppgi en kantine, eller spør om noen standardkantiner. Du vil få informasjon om åpningstid og meny ved disse. For informasjon om hvilke kantiner som støttes, besøk: https://github.com/dotkom/notiwire/blob/8b25461d39563f64b9109d8ce2f131778427c209/libs/cantina.js#L122 – Rapporter feil og problemer på GitHub, prosjektet er åpent og finnes her: https://github.com/sklirg/sit-bot'
     })
+    return next();
+  } else if (requestedCantina === 'select') {
+    res.send(userSelectCantinaMessage(await getCantinas()));
     return next();
   }
 

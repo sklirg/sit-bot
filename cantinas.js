@@ -11,6 +11,23 @@ const NOTIWIRE_CANTINAS = 'cantina/'
 
 const defaultCantinas = ['hangaren', 'realfag', 'storkiosk gloshaugen']
 
+async function getCantinas() {
+  const url = `${NOTIWIRE_API}${NOTIWIRE_CANTINAS}`;
+
+  const resp = await fetch(url);
+
+  if (resp.ok) {
+    const cantinas = resp.json();
+
+    return cantinas.map(cantina => ({
+      text: cantina.name,
+      value: cantina.id,
+    }))
+  } else {
+    // Sentry?
+  }
+}
+
 async function getCantina(cantina) {
   const url = `${NOTIWIRE_API}${NOTIWIRE_CANTINAS}${encodeURIComponent(cantina)}`;
   console.log('Requesting cantina info at', url)
@@ -43,5 +60,6 @@ function getDefaultCantinas() {
 
 module.exports = {
   getCantina,
+  getCantinas,
   getDefaultCantinas,
 }

@@ -80,6 +80,29 @@ function generateSlackMessage(cantinaInfo, options) {
 }
 
 
+async function userSelectCantinaMessage(cantinas) {
+  return {
+    response_type: 'ephemeral',
+    text: '',
+    attachments: [
+      {
+        text: 'Velg kantine her',
+        color: '#9400d3',
+        attachment_type: 'default',
+        actions: [
+          {
+            name: "cantinas_list",
+            text: 'Velg en kantine',
+            type: 'select',
+            options: cantinas,
+          }
+        ],
+      }
+    ]
+  }
+}
+
+
 async function postDelayedSlackMessage(response_url, message) {
   console.log('posting to slack', response_url, message)
   const resp = await fetch(response_url, {
@@ -96,4 +119,5 @@ module.exports = {
   generateSlackMessage,
   postDelayedSlackMessage,
   slackInstall,
+  userSelectCantinaMessage,
 }
