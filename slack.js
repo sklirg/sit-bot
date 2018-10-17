@@ -120,7 +120,9 @@ function handleInteractiveMessage(payload) {
 
   // Return the selected options for a cantina selection.
   if (payload.actions && payload.actions.length > 0) {
-    return payload.actions.map(option => option.value);
+
+    return payload.actions.map(action => (action.selected_options && action.selected_options.map(option => option.value)))
+      .reduce((a, b) => [...b, ...a], []);
   }
 }
 
